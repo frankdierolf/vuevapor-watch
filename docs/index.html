@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-vapor-metrics | Tracking Vue Vapor's path to 10KB</title>
+  <meta name="description" content="Track Vue Vapor Mode's bundle size evolution as it progresses toward its ~10KB gzipped target.">
+  <meta name="keywords" content="Vue, Vapor Mode, Vue 3.6, bundle size, benchmarks, performance">
+  <meta name="author" content="Frank Dierolf">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="vue-vapor-metrics | Tracking Vue Vapor's path to 10KB">
+  <meta property="og:description" content="Track Vue Vapor Mode's bundle size evolution as it progresses toward its ~10KB gzipped target.">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="vue-vapor-metrics | Tracking Vue Vapor's path to 10KB">
+  <meta name="twitter:description" content="Track Vue Vapor Mode's bundle size evolution as it progresses toward its ~10KB gzipped target.">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main data-page="vue-vapor-metrics">
+    <div data-component="container">
+
+      <!-- Hero -->
+      <section data-component="hero">
+        <div data-slot="logo">
+          <span data-slot="wordmark">vue-vapor-metrics</span>
+        </div>
+        <div data-slot="hero-copy">
+          <h1>Tracking Vue Vapor's path to 10KB</h1>
+          <p>Automated benchmarks comparing Vue Vapor Mode vs Classic Vue bundle sizes. Watch the progress as Vapor evolves toward its promised ~10KB gzipped target.</p>
+        </div>
+        <div data-slot="hero-cta">
+          <a href="#benchmark" data-slot="cta-primary">View Benchmarks</a>
+          <a href="https://github.com/frankdierolf/vue-vapor-metrics" target="_blank" rel="noopener" data-slot="cta-secondary">GitHub</a>
+        </div>
+      </section>
+
+      <!-- Live Benchmark -->
+      <section data-component="benchmark" id="benchmark">
+        <h2>Current Benchmark</h2>
+        <div data-slot="stats">
+          <div data-slot="stat-card">
+            <div data-slot="stat-label">Vapor (gzipped)</div>
+            <div data-slot="stat-value" data-accent id="vapor-size"><span data-slot="loading">Loading...</span></div>
+            <div data-slot="stat-sub" id="vapor-raw"></div>
+          </div>
+          <div data-slot="stat-card">
+            <div data-slot="stat-label">Classic (gzipped)</div>
+            <div data-slot="stat-value" id="classic-size"><span data-slot="loading">Loading...</span></div>
+            <div data-slot="stat-sub" id="classic-raw"></div>
+          </div>
+          <div data-slot="stat-card">
+            <div data-slot="stat-label">Savings</div>
+            <div data-slot="stat-value" data-accent id="savings"><span data-slot="loading">...</span></div>
+            <div data-slot="stat-sub" id="vue-version"></div>
+          </div>
+        </div>
+
+        <!-- Progress toward 10KB -->
+        <div data-component="progress">
+          <div data-slot="progress-header">
+            <span data-slot="progress-label">Progress to 10KB target</span>
+            <span data-slot="progress-value" id="progress-percent">--</span>
+          </div>
+          <div data-slot="progress-bar">
+            <div data-slot="progress-fill" id="progress-fill" style="width: 0%"></div>
+          </div>
+          <div data-slot="progress-markers">
+            <span>30 KB</span>
+            <span>Current: <span id="progress-current">--</span></span>
+            <span>10 KB target</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Table -->
+      <section data-component="history">
+        <h2>Benchmark History</h2>
+        <div data-slot="table-wrapper">
+          <table data-slot="table">
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th>Vapor (gzip)</th>
+                <th>Classic (gzip)</th>
+                <th>Savings</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="history-table">
+              <tr>
+                <td colspan="5"><span data-slot="loading">Loading history...</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- What is This? -->
+      <section data-component="features">
+        <div data-slot="section-header">
+          <h2>What is this?</h2>
+          <p>A tracker for Vue Vapor Mode's evolution toward standalone builds.</p>
+        </div>
+        <ul>
+          <li>
+            <span data-slot="marker">[*]</span>
+            <div><strong>Vue Vapor Mode</strong> is Vue 3.6's new compilation strategy that eliminates the Virtual DOM</div>
+          </li>
+          <li>
+            <span data-slot="marker">[*]</span>
+            <div><strong>The 10KB promise</strong> Vapor-only builds should eventually drop to ~10KB gzipped</div>
+          </li>
+          <li>
+            <span data-slot="marker">[*]</span>
+            <div><strong>Currently bundled</strong> Vue 3.6 alpha still includes runtime-core alongside runtime-vapor</div>
+          </li>
+          <li>
+            <span data-slot="marker">[*]</span>
+            <div><strong>This tracker</strong> monitors each Vue 3.6.x release to watch the progress</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- How It Works -->
+      <section data-component="workflow">
+        <h2>How It Works</h2>
+        <div data-slot="steps">
+          <div data-slot="step">
+            <div data-slot="step-number">1</div>
+            <div data-slot="step-content">
+              <h3>Daily Check</h3>
+              <p>GitHub Actions checks for new Vue 3.6.x releases every day</p>
+            </div>
+          </div>
+          <div data-slot="step">
+            <div data-slot="step-number">2</div>
+            <div data-slot="step-content">
+              <h3>Auto Benchmark</h3>
+              <p>When a new version is found, it builds both Vapor and Classic variants</p>
+            </div>
+          </div>
+          <div data-slot="step">
+            <div data-slot="step-number">3</div>
+            <div data-slot="step-content">
+              <h3>PR Created</h3>
+              <p>A pull request is opened with the benchmark results for review</p>
+            </div>
+          </div>
+          <div data-slot="step">
+            <div data-slot="step-number">4</div>
+            <div data-slot="step-content">
+              <h3>History Updated</h3>
+              <p>Once merged, the benchmark history is updated and this page reflects the latest data</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Start -->
+      <section data-component="quickstart">
+        <h2>Run It Yourself</h2>
+        <pre><code><span data-slot="comment"># Clone the repo</span>
+git clone https://github.com/frankdierolf/vue-vapor-metrics
+cd vue-vapor-metrics
+
+<span data-slot="comment"># Install dependencies</span>
+npm install
+
+<span data-slot="comment"># Run the benchmark</span>
+npm run <span data-slot="highlight">benchmark</span>
+
+<span data-slot="comment"># Or inspect the builds (readable output)</span>
+npm run <span data-slot="highlight">benchmark:inspect</span></code></pre>
+      </section>
+
+      <!-- Footer -->
+      <footer data-component="footer">
+        <div data-slot="cell">
+          <a href="https://github.com/frankdierolf/vue-vapor-metrics" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div data-slot="cell">
+          <a href="https://github.com/frankdierolf/vue-vapor-metrics/issues" target="_blank" rel="noopener">Issues</a>
+        </div>
+        <div data-slot="cell">
+          <span>MIT License</span>
+        </div>
+        <div data-slot="cell">
+          <span>Frank Dierolf</span>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    // Fetch benchmark data and populate the page
+    const TARGET_KB = 10;
+    const MAX_DISPLAY_KB = 30;
+
+    function formatKB(bytes) {
+      return (bytes / 1024).toFixed(1) + ' KB';
+    }
+
+    function formatDate(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    async function loadBenchmarks() {
+      try {
+        const response = await fetch('../benchmark/results/build-history.json');
+        const data = await response.json();
+        const benchmarks = data.benchmarks;
+
+        if (benchmarks.length === 0) {
+          document.getElementById('vapor-size').textContent = 'No data';
+          return;
+        }
+
+        // Get latest benchmark
+        const latest = benchmarks[benchmarks.length - 1];
+        const vaporKB = latest.vapor.gzipped / 1024;
+        const classicKB = latest.classic.gzipped / 1024;
+        const savingsKB = Math.abs(latest.delta.gzipped) / 1024;
+
+        // Update stats
+        document.getElementById('vapor-size').textContent = formatKB(latest.vapor.gzipped);
+        document.getElementById('vapor-raw').textContent = formatKB(latest.vapor.raw) + ' raw';
+        document.getElementById('classic-size').textContent = formatKB(latest.classic.gzipped);
+        document.getElementById('classic-raw').textContent = formatKB(latest.classic.raw) + ' raw';
+        document.getElementById('savings').textContent = '-' + savingsKB.toFixed(1) + ' KB';
+        document.getElementById('vue-version').textContent = 'Vue ' + latest.vueVersion;
+
+        // Update progress bar
+        // Progress is inverted: closer to 10KB = more progress
+        // We show position on a 10KB to 30KB scale
+        const progressPercent = Math.max(0, Math.min(100, ((MAX_DISPLAY_KB - vaporKB) / (MAX_DISPLAY_KB - TARGET_KB)) * 100));
+        document.getElementById('progress-fill').style.width = progressPercent + '%';
+        document.getElementById('progress-percent').textContent = progressPercent.toFixed(0) + '% there';
+        document.getElementById('progress-current').textContent = vaporKB.toFixed(1) + ' KB';
+
+        // Populate history table (last 10, newest first)
+        const historyTable = document.getElementById('history-table');
+        const recentBenchmarks = benchmarks.slice(-10).reverse();
+
+        historyTable.innerHTML = recentBenchmarks.map((b, i) => `
+          <tr>
+            <td ${i === 0 ? 'data-highlight' : ''}>${b.vueVersion}</td>
+            <td ${i === 0 ? 'data-highlight' : ''}>${formatKB(b.vapor.gzipped)}</td>
+            <td data-dim>${formatKB(b.classic.gzipped)}</td>
+            <td data-highlight>-${(Math.abs(b.delta.gzipped) / 1024).toFixed(1)} KB</td>
+            <td data-dim>${formatDate(b.timestamp)}</td>
+          </tr>
+        `).join('');
+
+      } catch (error) {
+        console.error('Failed to load benchmarks:', error);
+        document.getElementById('vapor-size').textContent = 'Error loading data';
+      }
+    }
+
+    // Load data on page load
+    loadBenchmarks();
+  </script>
+</body>
+</html>

@@ -32,7 +32,7 @@ jobs:
       - name: Get latest Vue 3.6.x version
         id: latest
         run: |
-          LATEST=$(npm view vue@'^3.6.0-0' version 2>/dev/null || echo "")
+          LATEST=$(npm view vue@'^3.6.0-0' version 2>/dev/null | tail -1 | awk '{print $NF}' | tr -d "'" || echo "")
           if [ -z "$LATEST" ]; then
             echo "No Vue 3.6.x version found"
             exit 0

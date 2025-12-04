@@ -2,74 +2,82 @@
 
 **Live Site:** [vuevapor.watch](http://vuevapor.watch/)
 
-Tracking Vue Vapor Mode's bundle size evolution as it progresses toward the ~10KB gzipped target.
+This repository serves two purposes:
 
-## What This Does
+## 1. Working Vue Vapor + TypeScript Example
 
-1. **Tracks Vapor's Evolution** - Monitors when Vue Vapor will drop the classic runtime and reach ~10KB
-2. **Provides a Working Example** - Vue Vapor + TypeScript setup that actually works
+Setting up Vue Vapor with TypeScript is tricky during the alpha. This repo provides a working reference in `example/`.
 
-## Quick Start
+**Key workarounds:**
 
-```bash
-npm install
-npm run dev           # Development server
-npm run build         # Production build
-npm run benchmark     # Compare Vapor vs Classic
-```
-
-## How It Works
-
-A GitHub Action runs daily to:
-1. Check for new Vue 3.6.x releases
-2. Run benchmarks comparing Vapor vs Classic
-3. Create a PR with the results
-
-Results are displayed on [vuevapor.watch](http://vuevapor.watch/).
-
-## Project Structure
-
-```
-vuevapor-watch/
-├── example/           # Vapor example app with TypeScript
-├── benchmark/         # Build comparison tooling
-├── docs/              # Website (GitHub Pages)
-└── .github/workflows/ # Automation
-```
-
-## Why Bundle Sizes Are Still Large
-
-During alpha, Vue is porting features into Vapor mode. Once complete, Vapor-only apps will drop the Virtual DOM runtime (`@vue/runtime-core`, `@vue/runtime-dom`) and reach the ~10KB target.
-
-## Vapor Example
-
-```vue
-<script setup vapor lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
-<template>
-  <HelloWorld msg="Vite + Vue" />
-</template>
+```typescript
+// example/src/env.d.ts - Fix .vue imports
+declare module '*.vue' {
+  import type { createVaporApp } from 'vue'
+  type VaporRoot = Parameters<typeof createVaporApp>[0]
+  const component: VaporRoot
+  export default component
+}
 ```
 
 ```typescript
-// main.ts
+// example/src/main.ts - Entry point
 import { createVaporApp } from 'vue'
 import App from './App.vue'
 
 createVaporApp(App as any).mount('#app')
 ```
 
+```json
+// tsconfig.app.json
+{
+  "vueCompilerOptions": {
+    "target": 3.6
+  }
+}
+```
+
+These workarounds will become unnecessary once Vue 3.6 reaches stable.
+
+## 2. Automated Benchmarks
+
+Tracks Vue Vapor's bundle size evolution toward the ~10KB target.
+
+A GitHub Action runs daily to:
+1. Check for new Vue 3.6.x releases
+2. Run benchmarks comparing Vapor vs Classic
+3. Create a PR with results
+
+**Why sizes are still large:** During alpha, Vue is porting features into Vapor. Once complete, apps can drop the Virtual DOM runtime and reach ~10KB.
+
+See [vuevapor.watch](http://vuevapor.watch/) for live results or [benchmark/README.md](benchmark/README.md) for details.
+
+## Quick Start
+
+```bash
+npm install
+npm run dev           # Run example app
+npm run benchmark     # Compare Vapor vs Classic
+```
+
+## Project Structure
+
+```
+vuevapor-watch/
+├── example/           # Vue Vapor + TypeScript setup
+├── benchmark/         # Bundle size comparison tooling
+├── docs/              # Website (GitHub Pages)
+└── .github/workflows/ # Daily release tracker
+```
+
 ## Repository Settings
 
-For automated PRs, enable in GitHub: **Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests"**
+For automated PRs, enable: **Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests"**
 
 ## Resources
 
 - [Vue Vapor RFC](https://github.com/vuejs/rfcs/discussions/502)
 - [Benchmark History](benchmark/results/build-history.json)
-- [Benchmark Details](benchmark/README.md)
 
 ## License
 

@@ -1,5 +1,14 @@
 name: Vue 3.6 Release Tracker
 
+# This workflow creates PRs automatically when new Vue 3.6 releases are detected.
+#
+# REQUIRED REPOSITORY SETTING:
+# Enable "Allow GitHub Actions to create and approve pull requests" in:
+# Repository Settings > Actions > General > Workflow permissions
+#
+# Without this setting, the workflow will fail with:
+# "GitHub Actions is not permitted to create or approve pull requests"
+
 on:
   schedule:
     # Run daily at 10:00 UTC

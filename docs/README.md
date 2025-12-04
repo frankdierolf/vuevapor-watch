@@ -1,12 +1,26 @@
 # docs/
 
-This folder contains the static website deployed to **[vuevapor.watch](http://vuevapor.watch/)**.
+This folder contains the static website deployed to **[vuevapor.watch](https://vuevapor.watch/)**.
 
 ## Deployment
 
 The site is deployed via GitHub Pages from this `docs/` directory.
 
-**Live URL:** http://vuevapor.watch/
+**Live URL:** https://vuevapor.watch/
+
+### SSL/HTTPS Configuration
+
+GitHub Pages provides free SSL certificates for custom domains. For HTTPS to work:
+
+1. **DNS Configuration** - Your domain registrar must have A records pointing to GitHub's IPs:
+   - `185.199.108.153`
+   - `185.199.109.153`
+   - `185.199.110.153`
+   - `185.199.111.153`
+
+2. **Enable HTTPS** - In repository Settings > Pages, check "Enforce HTTPS"
+
+3. **Wait for provisioning** - GitHub may take up to 24 hours to provision the certificate after DNS is configured
 
 ## Contents
 

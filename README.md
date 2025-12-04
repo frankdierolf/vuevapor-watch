@@ -1,6 +1,6 @@
 # vuevapor.watch
 
-**Live Site:** [vuevapor.watch](http://vuevapor.watch/)
+**Live Site:** [vuevapor.watch](https://vuevapor.watch/)
 
 This repository serves two purposes:
 
@@ -50,7 +50,7 @@ A GitHub Action runs daily to:
 
 **Why sizes are still large:** During alpha, Vue is porting features into Vapor. Once complete, apps can drop the Virtual DOM runtime and reach ~10KB.
 
-See [vuevapor.watch](http://vuevapor.watch/) for live results or [benchmark/README.md](benchmark/README.md) for details.
+See [vuevapor.watch](https://vuevapor.watch/) for live results or [benchmark/README.md](benchmark/README.md) for details.
 
 ## Quick Start
 

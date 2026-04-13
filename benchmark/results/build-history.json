@@ -254,6 +254,23 @@
         "gzipped": -7964
       },
       "vueVersion": "3.6.0-beta.9"
+    },
+    {
+      "timestamp": "2026-04-13T11:12:41.788Z",
+      "mode": "benchmark",
+      "vapor": {
+        "raw": 52985,
+        "gzipped": 19952
+      },
+      "classic": {
+        "raw": 69298,
+        "gzipped": 27164
+      },
+      "delta": {
+        "raw": -16313,
+        "gzipped": -7212
+      },
+      "vueVersion": "3.6.0-beta.10"
     }
   ]
 }
